@@ -1,28 +1,32 @@
 <template>
   <h1>Peek-a-Vue</h1>
   <section class="game-board">
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
-    <div class="card"></div>
+    <Card v-for="card in cardList" :key="card.value" :card="card" />
   </section>
 </template>
 
 <script>
+import { ref } from 'vue'
+import Card from './components/Card'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Card
+  },
+  setup() {
+    const cardList = ref([])
+
+    for (let i = 0; i < 16; i++) {
+      cardList.value.push({
+        value: i
+      })
+    }
+
+    return {
+      cardList
+    }
+  }
 }
 </script>
 
@@ -43,9 +47,5 @@ export default {
   grid-row-gap: 30px;
   grid-column-gap: 30px;
   justify-content: center;
-}
-
-.card {
-  border: 5px solid #ccc;
 }
 </style>
