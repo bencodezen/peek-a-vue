@@ -4,7 +4,7 @@
     <Card
       v-for="card in cardList"
       :key="card.value"
-      :card="card"
+      v-bind="card"
       @user-selected="registerSelection"
     />
   </section>
@@ -26,6 +26,7 @@ export default {
 
     const registerSelection = payload => {
       userSelection.push(payload)
+      cardList.value[payload.position].visible = true
     }
 
     watch(userSelection, currentValue => {
@@ -42,11 +43,19 @@ export default {
     })
 
     for (let i = 0; i < 16; i++) {
-      cardList.value.push({
-        value: 2,
-        position: i,
-        matched: false
-      })
+      if (i % 2 === 0) {
+        cardList.value.push({
+          value: 2,
+          position: i,
+          matched: false
+        })
+      } else {
+        cardList.value.push({
+          value: 1,
+          position: i,
+          matched: false
+        })
+      }
     }
 
     return {

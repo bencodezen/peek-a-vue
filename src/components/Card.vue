@@ -1,35 +1,40 @@
 <script>
-import { ref } from 'vue'
-
 export default {
   props: {
-    card: {
-      type: Object,
+    matched: {
+      type: Boolean,
+      default: false
+    },
+    position: {
+      type: Number,
       required: true
+    },
+    value: {
+      type: Number,
+      required: true
+    },
+    visible: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['user-selected'],
   setup(props, context) {
-    const visible = ref(false)
-
     const flipCard = () => {
-      if (props.card.matched) {
-        visible.value = true
+      if (props.matched) {
+        return
       } else {
-        visible.value = !visible.value
-
-        if (visible.value) {
+        if (!props.visible) {
           context.emit('user-selected', {
-            value: props.card.value,
-            position: props.card.position
+            value: props.value,
+            position: props.position
           })
         }
       }
     }
 
     return {
-      flipCard,
-      visible
+      flipCard
     }
   }
 }
@@ -38,7 +43,7 @@ export default {
 <template>
   <div class="card" @click="flipCard">
     <div v-if="visible" class="card-face is-front">
-      {{ card.value }} - {{ card.matched }}
+      {{ value }} - {{ matched }}
     </div>
     <div v-else class="card-face is-back">
       Back
