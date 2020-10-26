@@ -8,11 +8,23 @@ export default {
       required: true
     }
   },
-  setup() {
+  emits: ['user-selected'],
+  setup(props, context) {
     const visible = ref(false)
 
     const flipCard = () => {
-      visible.value = !visible.value
+      if (props.card.matched) {
+        visible.value = true
+      } else {
+        visible.value = !visible.value
+
+        if (visible.value) {
+          context.emit('user-selected', {
+            value: props.card.value,
+            position: props.card.position
+          })
+        }
+      }
     }
 
     return {
@@ -26,7 +38,7 @@ export default {
 <template>
   <div class="card" @click="flipCard">
     <div v-if="visible" class="card-face is-front">
-      {{ card.value }}
+      {{ card.value }} - {{ card.matched }}
     </div>
     <div v-else class="card-face is-back">
       Back

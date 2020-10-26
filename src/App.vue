@@ -1,12 +1,18 @@
 <template>
   <h1>Peek-a-Vue</h1>
   <section class="game-board">
-    <Card v-for="card in cardList" :key="card.value" :card="card" />
+    <Card
+      v-for="card in cardList"
+      :key="card.value"
+      :card="card"
+      @user-selected="registerSelection"
+    />
   </section>
+  <p>{{ userSelection }}</p>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import Card from './components/Card'
 
 export default {
@@ -16,15 +22,37 @@ export default {
   },
   setup() {
     const cardList = ref([])
+    const userSelection = reactive([])
+
+    const registerSelection = payload => {
+      userSelection.push(payload)
+    }
+
+    watch(userSelection, currentValue => {
+      if (currentValue.length === 2) {
+        if (currentValue[0].value === currentValue[1].value) {
+          cardList.value[currentValue[0].position].matched = true
+          cardList.value[currentValue[1].position].matched = true
+        }
+
+        userSelection.length = 0
+      } else {
+        console.log('nope')
+      }
+    })
 
     for (let i = 0; i < 16; i++) {
       cardList.value.push({
-        value: i
+        value: 2,
+        position: i,
+        matched: false
       })
     }
 
     return {
-      cardList
+      cardList,
+      userSelection,
+      registerSelection
     }
   }
 }
