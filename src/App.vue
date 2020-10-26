@@ -34,9 +34,14 @@ export default {
         if (currentValue[0].value === currentValue[1].value) {
           cardList.value[currentValue[0].position].matched = true
           cardList.value[currentValue[1].position].matched = true
+          userSelection.length = 0
+        } else {
+          setTimeout(() => {
+            cardList.value[currentValue[0].position].visible = false
+            cardList.value[currentValue[1].position].visible = false
+            userSelection.length = 0
+          }, 2000)
         }
-
-        userSelection.length = 0
       } else {
         console.log('nope')
       }
