@@ -1,14 +1,16 @@
 <template>
-  <h1>Peek-a-Vue</h1>
+  <h1><img src="../public/images/Peek-a-Vue-Header.png" alt="" /></h1>
   <section class="game-board">
     <Card
       v-for="card in cardList"
-      :key="card.value"
+      :key="`${card.value}-${card.position}`"
       v-bind="card"
       @user-selected="registerSelection"
     />
   </section>
-  <p>{{ userSelection }}</p>
+  <button class="button">
+    <img src="./assets/restart.svg" alt="" />Restart Game
+  </button>
 </template>
 
 <script>
@@ -40,28 +42,37 @@ export default {
             cardList.value[currentValue[0].position].visible = false
             cardList.value[currentValue[1].position].visible = false
             userSelection.length = 0
-          }, 2000)
+          }, 1000)
         }
-      } else {
-        console.log('nope')
       }
     })
 
-    for (let i = 0; i < 16; i++) {
-      if (i % 2 === 0) {
-        cardList.value.push({
-          value: 2,
-          position: i,
-          matched: false
-        })
-      } else {
-        cardList.value.push({
-          value: 1,
-          position: i,
-          matched: false
-        })
+    const cardIcons = [
+      'bat',
+      'candy',
+      'cauldron',
+      'cupcake',
+      'ghost',
+      'moon',
+      'pumpkin',
+      'witchHat'
+    ]
+
+    cardIcons.forEach((icon, index) => {
+      let card = {
+        value: icon,
+        matched: false
       }
-    }
+
+      cardList.value.push({
+        ...card,
+        position: index * 2
+      })
+      cardList.value.push({
+        ...card,
+        position: index * 2 + 1
+      })
+    })
 
     return {
       cardList,
@@ -79,15 +90,41 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background-color: #00070c;
+  background-image: url('../public/images/spiderbackground.png');
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin: 0;
+  padding-top: 60px;
+  padding-bottom: 30px;
+}
+
+.button {
+  background-color: #e78805;
+  color: #fff;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  margin: 30px auto;
 }
 
 .game-board {
   display: grid;
-  grid-template-columns: repeat(4, 100px);
-  grid-template-rows: repeat(4, 100px);
-  grid-row-gap: 30px;
-  grid-column-gap: 30px;
+  grid-template-columns: repeat(4, 120px);
+  grid-template-rows: repeat(4, 120px);
+  grid-row-gap: 24px;
+  grid-column-gap: 24px;
   justify-content: center;
 }
 </style>

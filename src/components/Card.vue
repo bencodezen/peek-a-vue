@@ -10,7 +10,7 @@ export default {
       required: true
     },
     value: {
-      type: Number,
+      type: String,
       required: true
     },
     visible: {
@@ -43,19 +43,46 @@ export default {
 <template>
   <div class="card" @click="flipCard">
     <div v-if="visible" class="card-face is-front">
-      {{ value }} - {{ matched }}
+      <img :src="`/images/${value}.png`" :alt="value" />
+      <img
+        v-if="matched"
+        class="card-check"
+        src="../assets/checkmark.svg"
+        alt="green checkmark"
+      />
     </div>
-    <div v-else class="card-face is-back">
-      Back
-    </div>
+    <div v-else class="card-face is-back"></div>
   </div>
 </template>
 
 <style>
 .card {
-  border: 5px solid #ccc;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.card-check {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+
+.card-face {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.card-face.is-front {
+  background-image: url('../../public/images/CardBackground-Icon.png');
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-face.is-back {
+  background-image: url('../../public/images/CardBackground-Empty.png');
 }
 </style>
