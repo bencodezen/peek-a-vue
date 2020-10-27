@@ -91,7 +91,14 @@ export default {
       cardList.value[payload.position].visible = true
 
       if (userSelection.value[0]) {
-        userSelection.value[1] = payload
+        if (
+          userSelection.value[0].position === payload.position &&
+          userSelection.value[0].faceValue === payload.faceValue
+        ) {
+          return
+        } else {
+          userSelection.value[1] = payload
+        }
       } else {
         userSelection.value[0] = payload
       }
