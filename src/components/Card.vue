@@ -46,6 +46,7 @@ export default {
   <div class="card" :class="flippedStyles" @click="selectCard">
     <div class="card-face is-front">
       <img
+        class="card-image"
         :srcset="`/images/${value}@2x.png 2x, /images/${value}.png 1x`"
         :src="`/images/${value}.png`"
         :alt="value"
@@ -87,6 +88,10 @@ export default {
 .card-face.is-back {
   background-image: url('/images/card-bg-empty.png');
   color: white;
+}
+
+.card-image {
+  max-width: 100%;
 }
 
 .icon-checkmark {
