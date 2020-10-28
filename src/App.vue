@@ -11,10 +11,10 @@
     <p>A card matching game powered by Vue.js 3!</p>
   </section>
   <button v-if="newPlayer" @click="startGame" class="button">
-    <img src="/images/play.svg" alt="Play Icon" /> Start Game
+    <img src="/images/play.svg" alt="Play Icon" />Start Game
   </button>
   <button v-else @click="restartGame" class="button">
-    <img src="/images/restart.svg" alt="Restart Icon" /> Restart Game
+    <img src="/images/restart.svg" alt="Restart Icon" />Restart Game
   </button>
   <transition-group tag="section" class="game-board" name="shuffle-card">
     <Card
@@ -207,7 +207,7 @@ h1 {
 
 .description p {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .description p:last-child {
@@ -222,7 +222,7 @@ h1 {
 .button {
   background-color: #e78805;
   color: white;
-  padding: 0.75rem 1rem;
+  padding: 8px 16px 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -230,13 +230,13 @@ h1 {
   font-weight: bold;
   font-family: 'Titillium Web', sans-serif;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1rem;
   border: 0;
   border-radius: 10px;
 }
 
 .button img {
-  padding-right: 5px;
+  padding-right: 12px;
 }
 
 .game-board {
