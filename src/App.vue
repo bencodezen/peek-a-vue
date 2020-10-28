@@ -21,7 +21,7 @@
       <span> and </span>
       <a
         class="powered-link"
-        href="https://www.netlify.com/?utm_source=twitter&utm_medium=peekavue-bh&utm_campaign=devex"
+        href="https://www.netlify.com/?utm_source=github&utm_medium=peekavue-bh&utm_campaign=devex"
       >
         <img
           class="powered-logo"
