@@ -45,7 +45,11 @@ export default {
 <template>
   <div class="card" :class="flippedStyles" @click="selectCard">
     <div class="card-face is-front">
-      <img :src="`/images/${value}.png`" :alt="value" />
+      <img
+        :srcset="`/images/${value}@2x.png 2x, /images/${value}.png 1x`"
+        :src="`/images/${value}.png`"
+        :alt="value"
+      />
       <img v-if="matched" src="/images/checkmark.svg" class="icon-checkmark" />
     </div>
     <div class="card-face is-back"></div>
