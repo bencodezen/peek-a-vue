@@ -18,7 +18,14 @@
     </p>
   </section>
   <button v-if="newPlayer" @click="startGame" class="button">
-    <img src="/images/play.svg" alt="Play Icon" />Start Game
+    <div class="button-icon">
+      <img class="icon-play" src="/images/play.svg" alt="Play Icon" /><img
+        class="icon-ghost"
+        src="/images/cute-ghost.svg"
+        alt="Cute Ghost"
+      />
+    </div>
+    Start Game
   </button>
   <button v-else @click="restartGame" class="button">
     <img src="/images/restart.svg" alt="Restart Icon" />Restart Game
@@ -35,6 +42,7 @@
     />
   </transition-group>
   <h2 class="status">{{ status }}</h2>
+  <footer>Made by <a href="https://www.bencodezen.io">BenCodeZen</a></footer>
 </template>
 
 <script>
@@ -244,10 +252,44 @@ a {
   font-size: 1rem;
   border: 0;
   border-radius: 10px;
+  transition: 0.2s all ease-in;
+  border: 2px solid #e78805;
+}
+
+.button:hover {
+  border: 2px solid #e78805;
+  background-color: transparent;
+}
+
+.button:hover .icon-ghost {
+  opacity: 1;
+}
+
+.button:hover .icon-play {
+  opacity: 0;
 }
 
 .button img {
   padding-right: 12px;
+  transition: 0.2s opacity ease-in;
+}
+
+.button .icon-ghost {
+  position: absolute;
+  left: -6px;
+  opacity: 0;
+}
+
+.button .icon-play {
+  position: absolute;
+  left: -6px;
+  opacity: 1;
+}
+
+.button-icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
 }
 
 .game-board {
