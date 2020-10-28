@@ -7,14 +7,29 @@
     class="title"
   />
   <section class="description">
-    <p>Welcome to Peek-a-Vue!</p>
-    <p>
-      A card matching game powered by
-      <a href="https://v3.vuejs.org/">Vue.js 3</a> and
+    <p>Welcome to Peek-a-Vue, a Halloween themed card matching game!</p>
+    <p class="powered-wrapper">
+      Powered by
+      <a class="powered-link" href="https://v3.vuejs.org/">
+        <img
+          class="powered-logo"
+          src="/images/vue-logo.svg"
+          alt="Vue.js logo"
+        />
+        Vue.js 3
+      </a>
+      <span> and </span>
       <a
+        class="powered-link"
         href="https://www.netlify.com/?utm_source=twitter&utm_medium=peekavue-bh&utm_campaign=devex"
-        >Netlify</a
-      >!
+      >
+        <img
+          class="powered-logo"
+          src="/images/netliheart.svg"
+          alt="Netlify Heart Logo"
+        />
+        Netlify
+      </a>
     </p>
   </section>
   <button v-if="newPlayer" @click="startGame" class="button">
@@ -204,6 +219,11 @@ h1 {
 
 a {
   color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 #app {
@@ -229,7 +249,9 @@ a {
 }
 
 .description p:last-child {
+  margin-top: 10px;
   margin-bottom: 30px;
+  font-size: 0.9rem;
 }
 
 .status {
@@ -332,5 +354,24 @@ a {
 
 .shuffle-card-move {
   transition: transform 0.8s ease-in;
+}
+
+.powered-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.powered-link {
+  padding: 0 5px;
+}
+
+.powered-link:last-child {
+  padding-right: 0;
+}
+
+.powered-logo {
+  width: 18px;
 }
 </style>
