@@ -8,7 +8,14 @@
   />
   <section class="description">
     <p>Welcome to Peek-a-Vue!</p>
-    <p>A card matching game powered by Vue.js 3!</p>
+    <p>
+      A card matching game powered by
+      <a href="https://v3.vuejs.org/">Vue.js 3</a> and
+      <a
+        href="https://www.netlify.com/?utm_source=twitter&utm_medium=peekavue-bh&utm_campaign=devex"
+        >Netlify</a
+      >!
+    </p>
   </section>
   <button v-if="newPlayer" @click="startGame" class="button">
     <img src="/images/play.svg" alt="Play Icon" />Start Game
@@ -185,6 +192,10 @@ body {
 
 h1 {
   margin-top: 0;
+}
+
+a {
+  color: white;
 }
 
 #app {
