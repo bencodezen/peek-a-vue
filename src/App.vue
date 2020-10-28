@@ -176,6 +176,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 h1 {
@@ -190,9 +191,9 @@ h1 {
   color: #2c3e50;
   background-image: url('/images/page-bg.png');
   background-color: #00070c;
-  height: 100vh;
   color: #fff;
   padding-top: 60px;
+  height: 100%;
 }
 
 .description {
