@@ -1,4 +1,4 @@
-# Peek-a-Vue
+# Peek-a-Vue (v0.2.0-alpha)
 
 The source code for the card-flipping Halloween themed game built with [Vue.js 3](https://v3.vuejs.org) and [Netlify](https://www.netlify.com/?utm_source=twitter&utm_medium=peekavue-bh&utm_campaign=devex)!
 
