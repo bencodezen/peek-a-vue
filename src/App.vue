@@ -10,6 +10,12 @@
     <p>Welcome to Peek-a-Vue!</p>
     <p>A card matching game powered by Vue.js 3!</p>
   </section>
+  <button v-if="newPlayer" @click="startGame" class="button">
+    <img src="/images/play.svg" alt="Play Icon" /> Start Game
+  </button>
+  <button v-else @click="restartGame" class="button">
+    <img src="/images/restart.svg" alt="Restart Icon" /> Restart Game
+  </button>
   <transition-group tag="section" class="game-board" name="shuffle-card">
     <Card
       v-for="card in cardList"
@@ -22,12 +28,6 @@
     />
   </transition-group>
   <h2 clas="status">{{ status }}</h2>
-  <button v-if="newPlayer" @click="startGame" class="button">
-    <img src="/images/play.svg" alt="Restart Icon" /> Start Game
-  </button>
-  <button v-else @click="restartGame" class="button">
-    <img src="/images/restart.svg" alt="Restart Icon" /> Restart Game
-  </button>
 </template>
 
 <script>
@@ -225,7 +225,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
+  margin: 0 auto 30px;
   font-weight: bold;
   font-family: 'Titillium Web', sans-serif;
   font-weight: bold;
