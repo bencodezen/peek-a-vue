@@ -27,7 +27,7 @@
       @select-card="flipCard"
     />
   </transition-group>
-  <h2 clas="status">{{ status }}</h2>
+  <h2 class="status">{{ status }}</h2>
 </template>
 
 <script>
@@ -216,6 +216,7 @@ h1 {
 
 .status {
   font-family: 'Titillium Web', sans-serif;
+  font-size: 18px;
 }
 
 .button {
