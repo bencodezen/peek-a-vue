@@ -18,7 +18,7 @@
         />
         Vue.js 3
       </a>
-      <span> and </span>
+      <span>, </span>
       <a
         class="powered-link"
         href="https://www.netlify.com/?utm_source=github&utm_medium=peekavue-bh&utm_campaign=devex"
@@ -30,6 +30,18 @@
         />
         Netlify
       </a>
+      <span> & </span>
+      <a
+        class="powered-link"
+        href="https://www.github.com/bencodezen/peek-a-vue"
+      >
+        <img
+          class="powered-logo"
+          src="/images/github-logo.svg"
+          alt="GitHub Logo"
+        />
+        GitHub</a
+      >
     </p>
   </section>
   <button v-if="newPlayer" @click="startGame" class="button">
@@ -367,6 +379,7 @@ a:hover {
   padding: 0 5px;
 }
 
+.powered-link:first-child,
 .powered-link:last-child {
   padding-right: 0;
 }
