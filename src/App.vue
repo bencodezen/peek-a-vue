@@ -53,19 +53,18 @@ export default {
     }
 
     const status = computed(() => {
-      if (remainingPairs.value === 0) {
+      if (matchesFound.value === 8) {
         return 'Player wins!'
       } else {
-        return `Remaining Pairs: ${remainingPairs.value}`
+        return `Matches found: ${matchesFound.value}`
       }
     })
 
-    const remainingPairs = computed(() => {
-      const remainingCards = cardList.value.filter(
-        card => card.matched === false
-      ).length
+    const matchesFound = computed(() => {
+      const matchedCards = cardList.value.filter(card => card.matched === true)
+        .length
 
-      return remainingCards / 2
+      return matchedCards / 2
     })
 
     const restartGame = () => {
@@ -134,8 +133,8 @@ export default {
       }
     }
 
-    watch(remainingPairs, currentValue => {
-      if (currentValue === 0) {
+    watch(matchesFound, currentValue => {
+      if (currentValue === 8) {
         launchConfetti()
       }
     })
@@ -217,6 +216,7 @@ h1 {
 .status {
   font-family: 'Titillium Web', sans-serif;
   font-size: 18px;
+  text-transform: uppercase;
 }
 
 .button {
