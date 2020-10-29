@@ -6,8 +6,9 @@ The source code for the card-flipping Halloween themed game built with [Vue.js 3
 
 The codebase is a fun exploration of Vue.js 3's Composition API and is not representative of best practices or patterns. It is still a work in progress and additional changes will be coming.
 
-## 📌 Branches
+## 📌 Milestones
 
+- [Start](https://github.com/bencodezen/peek-a-vue/tree/000-start): Where we started
 - [2020-10-28 branch](https://github.com/bencodezen/peek-a-vue/tree/2020-10-28): Where the [YouTube video](https://www.youtube.com/watch?v=WQa9-4K3me4) ends
 
 ## Setup
