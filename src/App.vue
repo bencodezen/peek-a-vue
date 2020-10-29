@@ -225,6 +225,11 @@ body {
   height: 100%;
 }
 
+html {
+  background-image: url('/images/page-bg.png');
+  background-color: #00070c;
+}
+
 h1 {
   margin-top: 0;
 }
@@ -244,8 +249,6 @@ a:hover {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-image: url('/images/page-bg.png');
-  background-color: #00070c;
   color: #fff;
   padding-top: 60px;
   height: 100%;
