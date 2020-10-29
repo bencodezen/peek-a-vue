@@ -250,8 +250,7 @@ a:hover {
   text-align: center;
   color: #2c3e50;
   color: #fff;
-  padding-top: 60px;
-  height: 100%;
+  padding: 60px 0;
 }
 
 .description {
