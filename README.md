@@ -10,6 +10,7 @@ The codebase is a fun exploration of Vue.js 3's Composition API and is not repre
 
 - [Start](https://github.com/bencodezen/peek-a-vue/tree/000-start): Where we started
 - [MVP](https://github.com/bencodezen/peek-a-vue/tree/001-mvp): Where the [Halloween YouTube video (2020-10-28)](https://www.youtube.com/watch?v=WQa9-4K3me4) ends
+- [Current](https://github.com/bencodezen/peek-a-vue/tree/main): Where the codebase currently is
 
 ## Setup
 
