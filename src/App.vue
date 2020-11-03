@@ -4,6 +4,7 @@ import { computed, ref, watch } from 'vue'
 import createDeck from './features/createDeck'
 import { launchConfetti } from './utilities/confetti'
 import Card from './components/Card'
+import halloweenDeck from './data/halloweenDeck.json'
 
 export default {
   name: 'App',
@@ -11,7 +12,7 @@ export default {
     Card
   },
   setup() {
-    const { cardList } = createDeck()
+    const { cardList } = createDeck(halloweenDeck)
     const userSelection = ref([])
     const newPlayer = ref(true)
 
