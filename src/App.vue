@@ -1,77 +1,3 @@
-<template>
-  <h1 class="sr-only">Peek-a-Vue</h1>
-  <img
-    srcset="/images/peek-a-vue-title@2x.png 2x, /images/peek-a-vue-title.png 1x"
-    src="/images/peek-a-vue-title.png"
-    alt="Peek-a-Vue"
-    class="title"
-  />
-  <section class="description">
-    <p>Welcome to Peek-a-Vue, a Halloween themed card matching game!</p>
-    <p class="powered-wrapper">
-      Powered by
-      <a class="powered-link" href="https://v3.vuejs.org/">
-        <img
-          class="powered-logo"
-          src="/images/vue-logo.svg"
-          alt="Vue.js logo"
-        />
-        Vue.js 3
-      </a>
-      <span>, </span>
-      <a
-        class="powered-link"
-        href="https://www.netlify.com/?utm_source=github&utm_medium=peekavue-bh&utm_campaign=devex"
-      >
-        <img
-          class="powered-logo"
-          src="/images/netliheart.svg"
-          alt="Netlify Heart Logo"
-        />
-        Netlify
-      </a>
-      <span> & </span>
-      <a
-        class="powered-link"
-        href="https://www.github.com/bencodezen/peek-a-vue"
-      >
-        <img
-          class="powered-logo"
-          src="/images/github-logo.svg"
-          alt="GitHub Logo"
-        />
-        GitHub</a
-      >
-    </p>
-  </section>
-  <button v-if="newPlayer" @click="startGame" class="button">
-    <div class="button-icon">
-      <img class="icon-play" src="/images/play.svg" alt="Play Icon" /><img
-        class="icon-ghost"
-        src="/images/cute-ghost.svg"
-        alt="Cute Ghost"
-      />
-    </div>
-    Start Game
-  </button>
-  <button v-else @click="restartGame" class="button">
-    <img src="/images/restart.svg" alt="Restart Icon" />Restart Game
-  </button>
-  <transition-group tag="section" class="game-board" name="shuffle-card">
-    <Card
-      v-for="card in cardList"
-      :key="`${card.value}-${card.variant}`"
-      :matched="card.matched"
-      :value="card.value"
-      :visible="card.visible"
-      :position="card.position"
-      @select-card="flipCard"
-    />
-  </transition-group>
-  <h2 class="status">{{ status }}</h2>
-  <footer>Made by <a href="https://www.bencodezen.io">BenCodeZen</a></footer>
-</template>
-
 <script>
 import _ from 'lodash'
 import { computed, ref, watch } from 'vue'
@@ -216,6 +142,80 @@ export default {
   }
 }
 </script>
+
+<template>
+  <h1 class="sr-only">Peek-a-Vue</h1>
+  <img
+    srcset="/images/peek-a-vue-title@2x.png 2x, /images/peek-a-vue-title.png 1x"
+    src="/images/peek-a-vue-title.png"
+    alt="Peek-a-Vue"
+    class="title"
+  />
+  <section class="description">
+    <p>Welcome to Peek-a-Vue, a Halloween themed card matching game!</p>
+    <p class="powered-wrapper">
+      Powered by
+      <a class="powered-link" href="https://v3.vuejs.org/">
+        <img
+          class="powered-logo"
+          src="/images/vue-logo.svg"
+          alt="Vue.js logo"
+        />
+        Vue.js 3
+      </a>
+      <span>, </span>
+      <a
+        class="powered-link"
+        href="https://www.netlify.com/?utm_source=github&utm_medium=peekavue-bh&utm_campaign=devex"
+      >
+        <img
+          class="powered-logo"
+          src="/images/netliheart.svg"
+          alt="Netlify Heart Logo"
+        />
+        Netlify
+      </a>
+      <span> & </span>
+      <a
+        class="powered-link"
+        href="https://www.github.com/bencodezen/peek-a-vue"
+      >
+        <img
+          class="powered-logo"
+          src="/images/github-logo.svg"
+          alt="GitHub Logo"
+        />
+        GitHub</a
+      >
+    </p>
+  </section>
+  <button v-if="newPlayer" @click="startGame" class="button">
+    <div class="button-icon">
+      <img class="icon-play" src="/images/play.svg" alt="Play Icon" /><img
+        class="icon-ghost"
+        src="/images/cute-ghost.svg"
+        alt="Cute Ghost"
+      />
+    </div>
+    Start Game
+  </button>
+  <button v-else @click="restartGame" class="button">
+    <img src="/images/restart.svg" alt="Restart Icon" />Restart Game
+  </button>
+  <transition-group tag="section" class="game-board" name="shuffle-card">
+    <Card
+      v-for="card in cardList"
+      :key="`${card.value}-${card.variant}`"
+      :matched="card.matched"
+      :value="card.value"
+      :visible="card.visible"
+      :position="card.position"
+      @select-card="flipCard"
+    />
+  </transition-group>
+  <h2 class="status">{{ status }}</h2>
+  <footer>Made by <a href="https://www.bencodezen.io">BenCodeZen</a></footer>
+</template>
 
 <style>
 html,
