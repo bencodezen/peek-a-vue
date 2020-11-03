@@ -1,7 +1,7 @@
 <script>
-import _ from 'lodash'
-import { computed, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import createDeck from './features/createDeck'
+import createGame from './features/createGame'
 import { launchConfetti } from './utilities/confetti'
 import Card from './components/Card'
 import halloweenDeck from './data/halloweenDeck.json'
@@ -13,42 +13,14 @@ export default {
   },
   setup() {
     const { cardList } = createDeck(halloweenDeck)
+    const {
+      newPlayer,
+      startGame,
+      restartGame,
+      matchesFound,
+      status
+    } = createGame(cardList)
     const userSelection = ref([])
-    const newPlayer = ref(true)
-
-    const startGame = () => {
-      newPlayer.value = false
-
-      restartGame()
-    }
-
-    const status = computed(() => {
-      if (matchesFound.value === 8) {
-        return 'Player wins!'
-      } else {
-        return `Matches found: ${matchesFound.value}`
-      }
-    })
-
-    const matchesFound = computed(() => {
-      const matchedCards = cardList.value.filter(card => card.matched === true)
-        .length
-
-      return matchedCards / 2
-    })
-
-    const restartGame = () => {
-      cardList.value = _.shuffle(cardList.value)
-
-      cardList.value = cardList.value.map((card, index) => {
-        return {
-          ...card,
-          matched: false,
-          position: index,
-          visible: false
-        }
-      })
-    }
 
     const flipCard = payload => {
       cardList.value[payload.position].visible = true
