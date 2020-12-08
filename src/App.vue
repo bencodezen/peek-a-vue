@@ -5,13 +5,15 @@ import createGame from './features/createGame'
 import { launchConfetti } from './utilities/confetti'
 import AppHero from './components/AppHero'
 import Card from './components/Card'
+import NewGameButton from './components/NewGameButton'
 import halloweenDeck from './data/halloweenDeck.json'
 
 export default {
   name: 'App',
   components: {
     AppHero,
-    Card
+    Card,
+    NewGameButton
   },
   setup() {
     const { cardList } = createDeck(halloweenDeck)
@@ -23,6 +25,14 @@ export default {
       status
     } = createGame(cardList)
     const userSelection = ref([])
+
+    const startNewGame = () => {
+      if (newPlayer) {
+        startGame()
+      } else {
+        restartGame()
+      }
+    }
 
     const flipCard = payload => {
       cardList.value[payload.position].visible = true
@@ -75,8 +85,7 @@ export default {
       flipCard,
       userSelection,
       status,
-      restartGame,
-      startGame,
+      startNewGame,
       newPlayer
     }
   }
@@ -85,19 +94,7 @@ export default {
 
 <template>
   <AppHero />
-  <button v-if="newPlayer" @click="startGame" class="button">
-    <div class="button-icon">
-      <img class="icon-play" src="/images/play.svg" alt="Play Icon" /><img
-        class="icon-ghost"
-        src="/images/cute-ghost.svg"
-        alt="Cute Ghost"
-      />
-    </div>
-    Start Game
-  </button>
-  <button v-else @click="restartGame" class="button">
-    <img src="/images/restart.svg" alt="Restart Icon" />Restart Game
-  </button>
+  <NewGameButton :newPlayer="newPlayer" @start-new-game="startNewGame" />
   <transition-group tag="section" class="game-board" name="shuffle-card">
     <Card
       v-for="card in cardList"
@@ -153,60 +150,6 @@ a:hover {
   font-family: 'Titillium Web', sans-serif;
   font-size: 18px;
   text-transform: uppercase;
-}
-
-.button {
-  background-color: #e78805;
-  color: white;
-  padding: 8px 16px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 30px;
-  font-weight: bold;
-  font-family: 'Titillium Web', sans-serif;
-  font-weight: bold;
-  font-size: 1rem;
-  border: 0;
-  border-radius: 10px;
-  transition: 0.2s all ease-in;
-  border: 2px solid #e78805;
-}
-
-.button:hover {
-  border: 2px solid #e78805;
-  background-color: transparent;
-}
-
-.button:hover .icon-ghost {
-  opacity: 1;
-}
-
-.button:hover .icon-play {
-  opacity: 0;
-}
-
-.button img {
-  padding-right: 12px;
-  transition: 0.2s opacity ease-in;
-}
-
-.button .icon-ghost {
-  position: absolute;
-  left: -6px;
-  opacity: 0;
-}
-
-.button .icon-play {
-  position: absolute;
-  left: -6px;
-  opacity: 1;
-}
-
-.button-icon {
-  position: relative;
-  width: 24px;
-  height: 24px;
 }
 
 .game-board {
