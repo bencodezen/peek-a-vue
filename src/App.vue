@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import createDeck from './features/createDeck'
 import createGame from './features/createGame'
 import { launchConfetti } from './utilities/confetti'
+import AppFooter from './components/AppFooter'
 import AppHero from './components/AppHero'
 import Card from './components/Card'
 import NewGameButton from './components/NewGameButton'
@@ -11,6 +12,7 @@ import halloweenDeck from './data/halloweenDeck.json'
 export default {
   name: 'App',
   components: {
+    AppFooter,
     AppHero,
     Card,
     NewGameButton
@@ -107,7 +109,7 @@ export default {
     />
   </transition-group>
   <h2 class="status">{{ status }}</h2>
-  <footer>Made by <a href="https://www.bencodezen.io">BenCodeZen</a></footer>
+  <AppFooter />
 </template>
 
 <style>
