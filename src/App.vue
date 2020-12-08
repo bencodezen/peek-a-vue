@@ -3,12 +3,14 @@ import { ref, watch } from 'vue'
 import createDeck from './features/createDeck'
 import createGame from './features/createGame'
 import { launchConfetti } from './utilities/confetti'
+import AppHero from './components/AppHero'
 import Card from './components/Card'
 import halloweenDeck from './data/halloweenDeck.json'
 
 export default {
   name: 'App',
   components: {
+    AppHero,
     Card
   },
   setup() {
@@ -82,51 +84,7 @@ export default {
 </script>
 
 <template>
-  <h1 class="sr-only">Peek-a-Vue</h1>
-  <img
-    srcset="/images/peek-a-vue-title@2x.png 2x, /images/peek-a-vue-title.png 1x"
-    src="/images/peek-a-vue-title.png"
-    alt="Peek-a-Vue"
-    class="title"
-  />
-  <section class="description">
-    <p>Welcome to Peek-a-Vue, a Halloween themed card matching game!</p>
-    <p class="powered-wrapper">
-      Powered by
-      <a class="powered-link" href="https://v3.vuejs.org/">
-        <img
-          class="powered-logo"
-          src="/images/vue-logo.svg"
-          alt="Vue.js logo"
-        />
-        Vue.js 3
-      </a>
-      <span>, </span>
-      <a
-        class="powered-link"
-        href="https://www.netlify.com/?utm_source=github&utm_medium=peekavue-bh&utm_campaign=devex"
-      >
-        <img
-          class="powered-logo"
-          src="/images/netliheart.svg"
-          alt="Netlify Heart Logo"
-        />
-        Netlify
-      </a>
-      <span> & </span>
-      <a
-        class="powered-link"
-        href="https://www.github.com/bencodezen/peek-a-vue"
-      >
-        <img
-          class="powered-logo"
-          src="/images/github-logo.svg"
-          alt="GitHub Logo"
-        />
-        GitHub</a
-      >
-    </p>
-  </section>
+  <AppHero />
   <button v-if="newPlayer" @click="startGame" class="button">
     <div class="button-icon">
       <img class="icon-play" src="/images/play.svg" alt="Play Icon" /><img
@@ -189,21 +147,6 @@ a:hover {
   color: #2c3e50;
   color: #fff;
   padding: 60px 0;
-}
-
-.description {
-  font-family: 'Titillium Web', sans-serif;
-}
-
-.description p {
-  margin: 0;
-  font-size: 1rem;
-}
-
-.description p:last-child {
-  margin-top: 10px;
-  margin-bottom: 30px;
-  font-size: 0.9rem;
 }
 
 .status {
@@ -300,31 +243,7 @@ a:hover {
   border: 0;
 }
 
-.title {
-  padding-bottom: 30px;
-}
-
 .shuffle-card-move {
   transition: transform 0.8s ease-in;
-}
-
-.powered-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 15px;
-}
-
-.powered-link {
-  padding: 0 5px;
-}
-
-.powered-link:first-child,
-.powered-link:last-child {
-  padding-right: 0;
-}
-
-.powered-logo {
-  width: 18px;
 }
 </style>
