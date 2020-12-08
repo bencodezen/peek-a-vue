@@ -5,7 +5,7 @@ import createGame from './features/createGame'
 import { launchConfetti } from './utilities/confetti'
 import AppFooter from './components/AppFooter'
 import AppHero from './components/AppHero'
-import Card from './components/Card'
+import GameBoard from './components/GameBoard'
 import NewGameButton from './components/NewGameButton'
 import halloweenDeck from './data/halloweenDeck.json'
 
@@ -14,7 +14,7 @@ export default {
   components: {
     AppFooter,
     AppHero,
-    Card,
+    GameBoard,
     NewGameButton
   },
   setup() {
@@ -97,18 +97,7 @@ export default {
 <template>
   <AppHero />
   <NewGameButton :newPlayer="newPlayer" @start-new-game="startNewGame" />
-  <transition-group tag="section" class="game-board" name="shuffle-card">
-    <Card
-      v-for="card in cardList"
-      :key="`${card.value}-${card.variant}`"
-      :matched="card.matched"
-      :value="card.value"
-      :visible="card.visible"
-      :position="card.position"
-      @select-card="flipCard"
-    />
-  </transition-group>
-  <h2 class="status">{{ status }}</h2>
+  <GameBoard :cardList="cardList" :status="status" @flip-card="flipCard" />
   <AppFooter />
 </template>
 
