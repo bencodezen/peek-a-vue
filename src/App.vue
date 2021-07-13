@@ -27,6 +27,7 @@ export default {
       status
     } = createGame(cardList)
     const userSelection = ref([])
+    const userCanFlipCard = ref(true)
 
     const startNewGame = () => {
       if (newPlayer) {
@@ -37,19 +38,23 @@ export default {
     }
 
     const flipCard = payload => {
-      cardList.value[payload.position].visible = true
+      if (userCanFlipCard.value) {
+        cardList.value[payload.position].visible = true
 
-      if (userSelection.value[0]) {
-        if (
-          userSelection.value[0].position === payload.position &&
-          userSelection.value[0].faceValue === payload.faceValue
-        ) {
-          return
+        if (userSelection.value[0]) {
+          if (
+            userSelection.value[0].position === payload.position &&
+            userSelection.value[0].faceValue === payload.faceValue
+          ) {
+            return
+          } else {
+            userSelection.value[1] = payload
+          }
         } else {
-          userSelection.value[1] = payload
+          userSelection.value[0] = payload
         }
       } else {
-        userSelection.value[0] = payload
+        return
       }
     }
 
@@ -65,6 +70,8 @@ export default {
         if (currentValue.length === 2) {
           const cardOne = currentValue[0]
           const cardTwo = currentValue[1]
+          // Disable ability to flip cards
+          userCanFlipCard.value = false
 
           if (cardOne.faceValue === cardTwo.faceValue) {
             cardList.value[cardOne.position].matched = true
@@ -73,6 +80,8 @@ export default {
             setTimeout(() => {
               cardList.value[cardOne.position].visible = false
               cardList.value[cardTwo.position].visible = false
+              // Allow user to flip a new card
+              userCanFlipCard.value = true
             }, 2000)
           }
 
