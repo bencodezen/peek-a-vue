@@ -76,6 +76,7 @@ export default {
           if (cardOne.faceValue === cardTwo.faceValue) {
             cardList.value[cardOne.position].matched = true
             cardList.value[cardTwo.position].matched = true
+            userCanFlipCard.value = true
           } else {
             setTimeout(() => {
               cardList.value[cardOne.position].visible = false
