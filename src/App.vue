@@ -12,15 +12,7 @@ const userSelection = ref([]);
 const userCanFlipCard = ref(true);
 
 const gameStore = useGameStore();
-const { cardList, newPlayer, matchesFound, status } = storeToRefs(gameStore);
-
-const startNewGame = () => {
-  if (newPlayer) {
-    gameStore.startGame();
-  } else {
-    gameStore.restartGame();
-  }
-};
+const { cardList, matchesFound, status } = storeToRefs(gameStore);
 
 const flipCard = payload => {
   if (userCanFlipCard.value) {
@@ -80,7 +72,7 @@ watch(
 
 <template>
   <AppHero />
-  <NewGameButton :newPlayer="newPlayer" @start-new-game="startNewGame" />
+  <NewGameButton />
   <GameBoard :cardList="cardList" :status="status" @flip-card="flipCard" />
   <AppFooter />
 </template>

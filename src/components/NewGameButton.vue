@@ -1,15 +1,16 @@
 <script setup>
-defineProps({
-  newPlayer: {
-    type: Boolean,
-    default: true
-  }
-});
+import { storeToRefs } from "pinia";
+import { useGameStore } from "../stores/GameStore";
 
-const emits = defineEmits(["start-new-game"]);
+const gameStore = useGameStore();
+const { newPlayer } = storeToRefs(gameStore);
 
 const startNewGame = () => {
-  emits("start-new-game");
+  if (newPlayer.value) {
+    gameStore.startGame();
+  } else {
+    gameStore.restartGame();
+  }
 };
 </script>
 
