@@ -1,4 +1,4 @@
-<script>
+<script setup>
 import { ref, watch } from "vue";
 import createDeck from "./features/createDeck";
 import createGame from "./features/createGame";
@@ -9,99 +9,75 @@ import GameBoard from "./components/GameBoard.vue";
 import NewGameButton from "./components/NewGameButton.vue";
 import halloweenDeck from "./data/halloweenDeck.json";
 
-export default {
-  name: "App",
-  components: {
-    AppFooter,
-    AppHero,
-    GameBoard,
-    NewGameButton
-  },
-  setup() {
-    const { cardList } = createDeck(halloweenDeck);
-    const {
-      newPlayer,
-      startGame,
-      restartGame,
-      matchesFound,
-      status
-    } = createGame(cardList);
-    const userSelection = ref([]);
-    const userCanFlipCard = ref(true);
+const { cardList } = createDeck(halloweenDeck);
+const { newPlayer, startGame, restartGame, matchesFound, status } = createGame(
+  cardList
+);
+const userSelection = ref([]);
+const userCanFlipCard = ref(true);
 
-    const startNewGame = () => {
-      if (newPlayer) {
-        startGame();
-      } else {
-        restartGame();
-      }
-    };
-
-    const flipCard = payload => {
-      if (userCanFlipCard.value) {
-        cardList.value[payload.position].visible = true;
-
-        if (userSelection.value[0]) {
-          if (
-            userSelection.value[0].position === payload.position &&
-            userSelection.value[0].faceValue === payload.faceValue
-          ) {
-            return;
-          } else {
-            userSelection.value[1] = payload;
-          }
-        } else {
-          userSelection.value[0] = payload;
-        }
-      } else {
-        return;
-      }
-    };
-
-    watch(matchesFound, currentValue => {
-      if (currentValue === 8) {
-        launchConfetti();
-      }
-    });
-
-    watch(
-      userSelection,
-      currentValue => {
-        if (currentValue.length === 2) {
-          const cardOne = currentValue[0];
-          const cardTwo = currentValue[1];
-          // Disable ability to flip cards
-          userCanFlipCard.value = false;
-
-          if (cardOne.faceValue === cardTwo.faceValue) {
-            cardList.value[cardOne.position].matched = true;
-            cardList.value[cardTwo.position].matched = true;
-            userCanFlipCard.value = true;
-          } else {
-            setTimeout(() => {
-              cardList.value[cardOne.position].visible = false;
-              cardList.value[cardTwo.position].visible = false;
-              // Allow user to flip a new card
-              userCanFlipCard.value = true;
-            }, 2000);
-          }
-
-          userSelection.value.length = 0;
-        }
-      },
-      { deep: true }
-    );
-
-    return {
-      cardList,
-      flipCard,
-      userSelection,
-      status,
-      startNewGame,
-      newPlayer
-    };
+const startNewGame = () => {
+  if (newPlayer) {
+    startGame();
+  } else {
+    restartGame();
   }
 };
+
+const flipCard = payload => {
+  if (userCanFlipCard.value) {
+    cardList.value[payload.position].visible = true;
+
+    if (userSelection.value[0]) {
+      if (
+        userSelection.value[0].position === payload.position &&
+        userSelection.value[0].faceValue === payload.faceValue
+      ) {
+        return;
+      } else {
+        userSelection.value[1] = payload;
+      }
+    } else {
+      userSelection.value[0] = payload;
+    }
+  } else {
+    return;
+  }
+};
+
+watch(matchesFound, currentValue => {
+  if (currentValue === 8) {
+    launchConfetti();
+  }
+});
+
+watch(
+  userSelection,
+  currentValue => {
+    if (currentValue.length === 2) {
+      const cardOne = currentValue[0];
+      const cardTwo = currentValue[1];
+      // Disable ability to flip cards
+      userCanFlipCard.value = false;
+
+      if (cardOne.faceValue === cardTwo.faceValue) {
+        cardList.value[cardOne.position].matched = true;
+        cardList.value[cardTwo.position].matched = true;
+        userCanFlipCard.value = true;
+      } else {
+        setTimeout(() => {
+          cardList.value[cardOne.position].visible = false;
+          cardList.value[cardTwo.position].visible = false;
+          // Allow user to flip a new card
+          userCanFlipCard.value = true;
+        }, 2000);
+      }
+
+      userSelection.value.length = 0;
+    }
+  },
+  { deep: true }
+);
 </script>
 
 <template>
