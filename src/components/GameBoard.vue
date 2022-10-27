@@ -1,5 +1,5 @@
 <script>
-import Card from './Card'
+import Card from "./Card.vue";
 
 export default {
   components: {
@@ -17,14 +17,14 @@ export default {
   },
   setup(props, ctx) {
     const selectCard = payload => {
-      ctx.emit('flip-card', payload)
-    }
+      ctx.emit("flip-card", payload);
+    };
 
     return {
       selectCard
-    }
+    };
   }
-}
+};
 </script>
 
 <template>
