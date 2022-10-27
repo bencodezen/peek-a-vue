@@ -1,29 +1,21 @@
-<script>
+<script setup>
 import Card from "./Card.vue";
 
-export default {
-  components: {
-    Card
+defineProps({
+  cardList: {
+    type: Array,
+    required: true
   },
-  props: {
-    cardList: {
-      type: Array,
-      required: true
-    },
-    status: {
-      type: String,
-      required: true
-    }
-  },
-  setup(props, ctx) {
-    const selectCard = payload => {
-      ctx.emit("flip-card", payload);
-    };
-
-    return {
-      selectCard
-    };
+  status: {
+    type: String,
+    required: true
   }
+});
+
+const emits = defineEmits(["flip-card"]);
+
+const selectCard = payload => {
+  emits("flip-card", payload);
 };
 </script>
 
