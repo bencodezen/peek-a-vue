@@ -1,48 +1,42 @@
-<script>
-import { computed } from 'vue'
+<script setup>
+import { computed } from "vue";
 
-export default {
-  props: {
-    matched: {
-      type: Boolean,
-      default: false
-    },
-    position: {
-      type: Number,
-      required: true
-    },
-    value: {
-      type: String,
-      required: true
-    },
-    visible: {
-      type: Boolean,
-      default: false
-    }
+const props = defineProps({
+  matched: {
+    type: Boolean,
+    default: false
   },
-  setup(props, context) {
-    const flippedStyles = computed(() => {
-      if (props.visible) {
-        return 'is-flipped'
-      }
-    })
-
-    const selectCard = () => {
-      // Check to make sure that a card is not already matched
-      if (!props.matched) {
-        context.emit('select-card', {
-          position: props.position,
-          faceValue: props.value
-        })
-      }
-    }
-
-    return {
-      flippedStyles,
-      selectCard
-    }
+  position: {
+    type: Number,
+    required: true
+  },
+  value: {
+    type: String,
+    required: true
+  },
+  visible: {
+    type: Boolean,
+    default: false
   }
-}
+});
+
+const emits = defineEmits(["select-card"]);
+
+const flippedStyles = computed(() => {
+  if (props.visible) {
+    return "is-flipped";
+  }
+});
+
+const selectCard = () => {
+  // Check to make sure that a card is not already matched
+  if (!props.matched) {
+    emits("select-card", {
+      position: props.position,
+      faceValue: props.value
+    });
+  }
+};
 </script>
 
 <template>
@@ -83,13 +77,13 @@ export default {
 }
 
 .card-face.is-front {
-  background-image: url('/images/card-bg.png');
+  background-image: url("/images/card-bg.png");
   color: white;
   transform: rotateY(180deg);
 }
 
 .card-face.is-back {
-  background-image: url('/images/card-bg-empty.png');
+  background-image: url("/images/card-bg-empty.png");
   color: white;
 }
 
