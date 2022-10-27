@@ -1,26 +1,24 @@
 <script setup>
 import { ref, watch } from "vue";
-import createDeck from "./features/createDeck";
-import createGame from "./features/createGame";
+import { storeToRefs } from "pinia";
+import { useGameStore } from "./stores/GameStore";
 import { launchConfetti } from "./utilities/confetti";
 import AppFooter from "./components/AppFooter.vue";
 import AppHero from "./components/AppHero.vue";
 import GameBoard from "./components/GameBoard.vue";
 import NewGameButton from "./components/NewGameButton.vue";
-import halloweenDeck from "./data/halloweenDeck.json";
 
-const { cardList } = createDeck(halloweenDeck);
-const { newPlayer, startGame, restartGame, matchesFound, status } = createGame(
-  cardList
-);
 const userSelection = ref([]);
 const userCanFlipCard = ref(true);
 
+const gameStore = useGameStore();
+const { cardList, newPlayer, matchesFound, status } = storeToRefs(gameStore);
+
 const startNewGame = () => {
   if (newPlayer) {
-    startGame();
+    gameStore.startGame();
   } else {
-    restartGame();
+    gameStore.restartGame();
   }
 };
 
