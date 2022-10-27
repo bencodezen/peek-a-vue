@@ -28,10 +28,13 @@ export default {
     })
 
     const selectCard = () => {
-      context.emit('select-card', {
-        position: props.position,
-        faceValue: props.value
-      })
+      // Check to make sure that a card is not already matched
+      if (!props.matched) {
+        context.emit('select-card', {
+          position: props.position,
+          faceValue: props.value
+        })
+      }
     }
 
     return {
